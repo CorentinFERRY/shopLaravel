@@ -4,22 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class ProductController extends Controller
+class CategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $products = [
-            ['id' => 0,'name' => 'T-shirt Laravel','price' => 19.99,],
-            ['id' => 1,'name' => 'Mug Développeur','price' => 12.50,],
-            ['id' => 2,'name' => 'Sticker PHP','price' => 3.99,],
-            ['id' => 3,'name' => 'Clavier mécanique RGB','price' => 89.90,],
-            ['id' => 4,'name' => 'Casque Gaming','price' => 59.00,]
-        ];
-
-        return view('products.index',compact('products'));
+        //
     }
 
     /**
@@ -44,14 +36,6 @@ class ProductController extends Controller
     public function show(string $id)
     {
         //
-        $products = [
-            ['id' => 0,'name' => 'T-shirt Laravel','price' => 19.99,],
-            ['id' => 1,'name' => 'Mug Développeur','price' => 12.50,],
-            ['id' => 2,'name' => 'Sticker PHP','price' => 3.99,],
-            ['id' => 3,'name' => 'Clavier mécanique RGB','price' => 89.90,],
-            ['id' => 4,'name' => 'Casque Gaming','price' => 59.00,]
-        ];
-        return view('products.product',['product' => $products[$id]]);
     }
 
     /**

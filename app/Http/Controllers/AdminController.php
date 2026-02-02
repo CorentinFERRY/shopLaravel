@@ -10,7 +10,7 @@ class AdminController extends Controller
     public function dashboard ()
     {
         // Tableau de bord admin
-        return "Dashboard ADMIN ! ";
+        return view('admin.dashboard');
     }
 
     public function listUsers()

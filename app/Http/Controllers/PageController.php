@@ -3,12 +3,19 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class PageController extends Controller
 {
-    public function home():string
+    public function home():View
     {
-        return redirect()->route('products.show',['id' => 42]);
+        $data = [
+            'name' => 'shopLaravel',
+            'nbrItems' => 40,
+            'state' => true
+        ];
+        // return view('index',['data' => $data]);
+        return view('index',compact('data'));
     }
 
     public function about():string
