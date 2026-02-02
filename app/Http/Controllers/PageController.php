@@ -11,8 +11,8 @@ class PageController extends Controller
     {
         $data = [
             'name' => 'shopLaravel',
-            'nbrItems' => 40,
-            'state' => true
+            'nbrItems' => 5,
+            'state' => false
         ];
         // return view('index',['data' => $data]);
         return view('index',compact('data'));

@@ -3,11 +3,19 @@
 
 @section('title','Catalogue')
 
+@section('pageTitle','Notre Catalogue')
+
 @section('content')
     @forelse ($products as $product)
-        <p> {{ $product['name']}} </p>
-        <p> {{ $product['price']}} </p>
-        <a href="/products/{{ $product['id'] }}"> Voir </a>
+        <x-product-card
+        :id="$product['id']"
+        :name="$product['name']"
+        :price="$product['price']"
+        />
+
+        <a href="{{ route('products.show', $product['id']) }}" class="btn btn-primary">
+            Voir le produit
+        </a>
     @empty
         <p> No Products ! </p>
     @endforelse

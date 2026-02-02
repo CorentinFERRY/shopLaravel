@@ -44,6 +44,13 @@ Route::name('admin.')->prefix('/admin')->group(function () {
         ->name('listUsers');                                                  // Ici on aura admin.listUsers
 });
 
+// Routes Auth
+Route::get('/login')->name('login');
+Route::get('/register')->name('register');
+Route::post('/logout')->name('logout');
+Route::get('/profile')->name('profile');
+
+
 
 // Puis la route fallback en DERNIER
 Route::fallback(function () {

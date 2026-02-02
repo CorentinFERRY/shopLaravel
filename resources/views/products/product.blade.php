@@ -4,7 +4,12 @@
 
 @section('title',$product['name'])
 
+@section('pageTitle',$product['name'])
+
 @section('content')
-    <p> {{ $product['name']}} </p>
-    <p> {{ $product['price']}} </p>
+    <x-product-card
+        :id="$product['id']"
+        :name="$product['name']"
+        :price="$product['price']"
+    />
 @endsection
