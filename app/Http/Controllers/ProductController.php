@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Product;
 use App\View\Components\ProductCard;
 use Illuminate\Http\Request;
+use Laravel\Prompts\Concerns\Fallback;
 
 class ProductController extends Controller
 {
@@ -12,14 +14,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = [
-            ['id' => 0,'name' => 'T-shirt Laravel','price' => 19.99,],
-            ['id' => 1,'name' => 'Mug Développeur','price' => 12.50,],
-            ['id' => 2,'name' => 'Sticker PHP','price' => 3.99,],
-            ['id' => 3,'name' => 'Clavier mécanique RGB','price' => 89.90,],
-            ['id' => 4,'name' => 'Casque Gaming','price' => 59.00,]
-        ];
-
+        $products = Product::all();
         return view('products.index',compact('products'));
     }
 
@@ -28,7 +23,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        return view('products.create');
     }
 
     /**
@@ -36,7 +31,7 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+       
     }
 
     /**
@@ -45,14 +40,9 @@ class ProductController extends Controller
     public function show(string $id)
     {
         //
-        $products = [
-            ['id' => 0,'name' => 'T-shirt Laravel','price' => 19.99,],
-            ['id' => 1,'name' => 'Mug Développeur','price' => 12.50,],
-            ['id' => 2,'name' => 'Sticker PHP','price' => 3.99,],
-            ['id' => 3,'name' => 'Clavier mécanique RGB','price' => 89.90,],
-            ['id' => 4,'name' => 'Casque Gaming','price' => 59.00,]
-        ];
-        return view('products.product',['product' => $products[$id]]);
+        $product = Product::findOrFail((int)$id);
+        return view('products.show',['product' => $product]);
+        
     }
 
     /**
