@@ -33,7 +33,16 @@ Route::resource('products', ProductController::class);
 // GET    /products/{id}/edit → edit   → products.edit
 // PUT    /products/{id}     → update  → products.update
 // DELETE /products/{id}     → destroy → products.destroy
-Route::resource('category',CategoryController::class);
+
+Route::resource('categories',CategoryController::class);
+// Crée automatiquement :
+// GET    /categories          → index   → categories.index
+// GET    /categories/create   → create  → categories.create
+// POST   /categories          → store   → categories.store
+// GET    /categories/{id}     → show    → categories.show
+// GET    /categories/{id}/edit → edit   → categories.edit
+// PUT    /categories/{id}     → update  → categories.update
+// DELETE /categories/{id}     → destroy → categories.destroy
 
 // Groupe de routes admin 
 // Crée un groupe pour le préfix '/admin' nommé par 'admin.xxxxx'

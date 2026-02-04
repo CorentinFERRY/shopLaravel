@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
@@ -9,9 +10,10 @@ class PageController extends Controller
 {
     public function home():View
     {
+        $nbrItems = Product::count();
+        
         $data = [
-            'name' => 'shopLaravel',
-            'nbrItems' => 5,
+            'nbrItems' => $nbrItems,
             'state' => false
         ];
         // return view('index',['data' => $data]);

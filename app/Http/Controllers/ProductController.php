@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\Category;
 use App\View\Components\ProductCard;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use Laravel\Prompts\Concerns\Fallback;
 
 class ProductController extends Controller
@@ -23,7 +25,8 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('products.create');
+        $categories = Category::pluck('name', 'id'); // Recupère seulement le nom et l'id des catégories.
+        return view('products.create', compact('categories'));
     }
 
     /**
@@ -31,7 +34,18 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-       
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'price' => 'required|numeric',
+            'stock' => 'numeric',
+            'category_id' => 'required|exists:categories,id'
+        ]);
+        $validated['slug'] = Str::slug($validated['name']);
+        $validated['description'] = $request->input('description',null);
+        Product::create($validated);
+        return redirect()->route('products.index')
+               ->with('success', 'Produit créé avec succès !');
+
     }
 
     /**
@@ -50,7 +64,9 @@ class ProductController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $product = Product::findOrFail((int)$id);
+        $categories = Category::pluck('name', 'id'); // Recupère seulement le nom et l'id des catégories.
+        return view('products.edit', compact('categories','product'));
     }
 
     /**
@@ -58,7 +74,22 @@ class ProductController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $product = Product::findOrFail((int)$id);
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'price' => 'required|numeric',
+            'stock' => 'numeric',
+            'image' => 'url|nullable',
+            'description' => 'string|nullable',
+            'category_id' => 'required|exists:categories,id',
+            'active' => 'boolean'
+        ]);
+
+        $validated['slug'] = Str::slug($validated['name']);
+        $product->update($validated);
+        return redirect()->route('products.index')
+               ->with('success', 'Produit modifié avec succès !');
+
     }
 
     /**
@@ -66,6 +97,8 @@ class ProductController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        Product::destroy($id);
+        return redirect()->route('products.index')
+            ->with('success', 'Produit supprimé avec succès !');
     }
 }
