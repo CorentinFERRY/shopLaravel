@@ -23,6 +23,9 @@
                             <a class="nav-link" href="{{ route('products.index') }}">Catalogue</a>
                         </li>
                         <li class="nav-item">
+                            <a class="nav-link" href="{{ route('categories.index') }}">Catégories</a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link" href="{{ route('admin.dashboard') }}">Dashboard admin</a>
                         </li>
                     </ul>
@@ -79,6 +82,7 @@
                 <div class="text-center text-md-end">
                     <a href="{{ route('home') }}" class="link-secondary me-3">Accueil</a>
                     <a href="{{ route('products.index') }}" class="link-secondary me-3">Catalogue</a>
+                    <a href="{{ route('categories.index') }}" class="link-secondary me-3">Catégories</a>
                     <a href="{{ route('admin.dashboard') }}" class="link-secondary">Administration</a>
                 </div>
             </div>

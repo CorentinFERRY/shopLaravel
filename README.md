@@ -11,6 +11,7 @@
 ## Configurer la base de données
 
 `mysql -u root -p <password>`
+``` CREATE DATABASE shoplaravel CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci; EXIT; ```
 
 > Execute le dump.sql pour reprendre la bdd
 

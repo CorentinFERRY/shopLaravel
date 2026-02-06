@@ -17,7 +17,7 @@
         <div class="row">
             @foreach ($products as $product)
                 <div class="col-md-4 mb-4">
-                    <x-product-card :name="$product->name" :price="$product->price" />
+                    <x-product-card :name="$product->name" :price="$product->price" :category="$product->category->name"/>
                     <div class="mt-2 d-flex justify-content-between">
                         <a href="{{ route('products.show', $product->id) }}" class="btn btn-primary btn-sm">Voir</a>
                         <a href="{{ route('products.edit', $product->id) }}" class="btn btn-outline-secondary btn-sm">Modifier</a>

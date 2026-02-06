@@ -10,5 +10,6 @@
     <x-product-card
         :name="$product->name"
         :price="$product->price"
+        :category="$product->category->name"
     />
 @endsection
