@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\ProductController;
@@ -29,20 +30,20 @@ Route::resource('products', ProductController::class);
 // GET    /products          → index   → products.index
 // GET    /products/create   → create  → products.create
 // POST   /products          → store   → products.store
-// GET    /products/{id}     → show    → products.show
-// GET    /products/{id}/edit → edit   → products.edit
-// PUT    /products/{id}     → update  → products.update
-// DELETE /products/{id}     → destroy → products.destroy
+// GET    /products/{product}     → show    → products.show
+// GET    /products/{product}/edit → edit   → products.edit
+// PUT    /products/{product}     → update  → products.update
+// DELETE /products/{product}     → destroy → products.destroy
 
 Route::resource('categories',CategoryController::class);
 // Crée automatiquement :
 // GET    /categories          → index   → categories.index
 // GET    /categories/create   → create  → categories.create
 // POST   /categories          → store   → categories.store
-// GET    /categories/{id}     → show    → categories.show
-// GET    /categories/{id}/edit → edit   → categories.edit
-// PUT    /categories/{id}     → update  → categories.update
-// DELETE /categories/{id}     → destroy → categories.destroy
+// GET    /categories/{category}     → show    → categories.show
+// GET    /categories/{category}/edit → edit   → categories.edit
+// PUT    /categories/{category}     → update  → categories.update
+// DELETE /categories/{category}     → destroy → categories.destroy
 
 // Groupe de routes admin 
 // Crée un groupe pour le préfix '/admin' nommé par 'admin.xxxxx'
@@ -51,6 +52,20 @@ Route::name('admin.')->prefix('/admin')->group(function () {
         ->name('dashboard');                                                  // Ici on aura admin.dashboard 
     Route::get('/listUsers', [AdminController::class, 'listUsers'])
         ->name('listUsers');                                                  // Ici on aura admin.listUsers
+});
+
+//Groupe de routes cart
+Route::name('cart.')->prefix('/cart')->group(function () {
+    Route::get('/index',[CartController::class,'index'])
+        ->name('index');
+    Route::post('/add',[CartController::class,'add'])
+        ->name('add');
+    Route::put('/update/{id}',[CartController::class,'update'])
+        ->name('update');
+    Route::delete('/remove/{id}',[CartController::class,'remove'])
+        ->name('remove');
+    Route::delete('/clear',[CartController::class,'clear'])
+        ->name('clear');
 });
 
 // Routes Auth

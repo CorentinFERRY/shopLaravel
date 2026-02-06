@@ -36,8 +36,9 @@ class ProductController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required|string|max:255',
-            'price' => 'required|numeric',
+            'price' => 'required|numeric|min:0',
             'stock' => 'numeric',
+            
             'category_id' => 'required|exists:categories,id'
         ]);
         $validated['slug'] = Str::slug($validated['name']);
@@ -51,20 +52,16 @@ class ProductController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Product $product)
     {
-        //
-        $product = Product::findOrFail((int)$id);
-        return view('products.show',['product' => $product]);
-        
+        return view('products.show',['product' => $product]);  
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Product $product)
     {
-        $product = Product::findOrFail((int)$id);
         $categories = Category::pluck('name', 'id'); // Recupère seulement le nom et l'id des catégories.
         return view('products.edit', compact('categories','product'));
     }
@@ -74,17 +71,16 @@ class ProductController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $product = Product::findOrFail((int)$id);
+        $product = Product::findOrFail($id);
         $validated = $request->validate([
             'name' => 'required|string|max:255',
-            'price' => 'required|numeric',
+            'price' => 'required|numeric|min:0',
             'stock' => 'numeric',
             'image' => 'url|nullable',
             'description' => 'string|nullable',
             'category_id' => 'required|exists:categories,id',
             'active' => 'boolean'
         ]);
-
         $validated['slug'] = Str::slug($validated['name']);
         $product->update($validated);
         return redirect()->route('products.index')
