@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 use function PHPUnit\Framework\returnValue;
 
@@ -23,7 +24,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        return view('categories.create');
     }
 
     /**
@@ -31,7 +32,14 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+         $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'string|nullable'
+        ]);
+        $validated['slug'] = Str::slug($validated['name']);
+        Category::create($validated);
+        return redirect()->route('categories.index')
+               ->with('success', 'Catégorie créée avec succès !');
     }
 
     /**
@@ -49,15 +57,23 @@ class CategoryController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $category=Category::findOrFail($id);
+        return view('categories.edit', compact('category'));
     }
-
     /**
      * Update the specified resource in storage.
      */
     public function update(Request $request, string $id)
     {
-        //
+        $category = Category::findOrFail($id);
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'string|nullable'
+        ]);
+        $validated['slug'] = Str::slug($validated['name']);
+        $category->update($validated);
+        return redirect()->route('categories.index')
+               ->with('success', 'Catégorie modifiée avec succès !');
     }
 
     /**
@@ -65,6 +81,8 @@ class CategoryController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        Category::destroy($id);
+        return redirect()->route('categories.index')
+            ->with('success', 'Catégorie supprimée avec succès !');
     }
 }
