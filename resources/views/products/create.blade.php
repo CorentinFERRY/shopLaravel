@@ -5,7 +5,7 @@
 @section('content')
     <h1 class="mb-4">Nouveau produit</h1>
 
-    <form action="{{ route('products.store') }}" method="POST" class="card p-4" novalidate>
+    <form action="{{ route('products.store') }}" method="POST" class="card p-4">
         @csrf
 
         <div class="row g-3">

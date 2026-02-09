@@ -31,9 +31,11 @@
                                 <span class="badge bg-info rounded-pill ms-2">{{count(session()->get('cart', [])) }}</span>
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('admin.dashboard') }}">Dashboard admin</a>
-                        </li>
+                        @auth
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('admin.dashboard') }}">Dashboard admin</a>
+                            </li>
+                        @endauth
                     </ul>
 
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
@@ -77,7 +79,6 @@
                 {{ session('success') }}
             </div>
         @endif
-
         @yield('content')
     </main>
 
@@ -89,9 +90,11 @@
                     <a href="{{ route('home') }}" class="link-secondary me-3">Accueil</a>
                     <a href="{{ route('products.index') }}" class="link-secondary me-3">Catalogue</a>
                     <a class="link-secondary me-3" href="{{ route('cart.index') }}">
-                                Mon panier<span class="badge bg-info rounded-pill ms-2">{{count(session()->get('cart', [])) }}</span>
-                            </a>
-                    <a href="{{ route('admin.dashboard') }}" class="link-secondary">Administration</a>
+                        Mon panier<span class="badge bg-info rounded-pill ms-2">{{count(session()->get('cart', [])) }}</span>
+                    </a>
+                    @auth
+                        <a href="{{ route('admin.dashboard') }}" class="link-secondary">Administration</a>
+                    @endauth
                 </div>
             </div>
         </div>
