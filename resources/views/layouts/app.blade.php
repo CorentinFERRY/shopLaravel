@@ -20,10 +20,16 @@
                 <div class="collapse navbar-collapse" id="mainNavbar">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
+                            <a class="nav-link" href="{{ route('categories.index') }}">Catégories</a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link" href="{{ route('products.index') }}">Catalogue</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('categories.index') }}">Catégories</a>
+                            <a class="nav-link" href="{{ route('cart.index') }}">
+                                Mon panier
+                                <span class="badge bg-info rounded-pill ms-2">{{count(session()->get('cart', [])) }}</span>
+                            </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('admin.dashboard') }}">Dashboard admin</a>
@@ -82,7 +88,9 @@
                 <div class="text-center text-md-end">
                     <a href="{{ route('home') }}" class="link-secondary me-3">Accueil</a>
                     <a href="{{ route('products.index') }}" class="link-secondary me-3">Catalogue</a>
-                    <a href="{{ route('categories.index') }}" class="link-secondary me-3">Catégories</a>
+                    <a class="link-secondary me-3" href="{{ route('cart.index') }}">
+                                Mon panier<span class="badge bg-info rounded-pill ms-2">{{count(session()->get('cart', [])) }}</span>
+                            </a>
                     <a href="{{ route('admin.dashboard') }}" class="link-secondary">Administration</a>
                 </div>
             </div>

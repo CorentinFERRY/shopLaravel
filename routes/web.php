@@ -60,9 +60,9 @@ Route::name('cart.')->prefix('/cart')->group(function () {
         ->name('index');
     Route::post('/add',[CartController::class,'add'])
         ->name('add');
-    Route::put('/update/{id}',[CartController::class,'update'])
+    Route::put('/update/{product}',[CartController::class,'update'])
         ->name('update');
-    Route::delete('/remove/{id}',[CartController::class,'remove'])
+    Route::delete('/remove/{product}',[CartController::class,'remove'])
         ->name('remove');
     Route::delete('/clear',[CartController::class,'clear'])
         ->name('clear');
