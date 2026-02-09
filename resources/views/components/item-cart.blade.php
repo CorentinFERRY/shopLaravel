@@ -10,6 +10,7 @@
         <form action="{{ route('cart.update', $product) }}" method="post">
             @csrf
             @method('PUT')
+            <input type="hidden" id="product_id" name="product_id" value={{ $product->id }}>
             <label for="quantity"> Quantité :</label>
             <input type="number" id="quantity" name="quantity" value={{ $product->quantity }} class="form-control @error('quantity') is-invalid @enderror">
             @error('quantity') 

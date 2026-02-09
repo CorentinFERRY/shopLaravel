@@ -10,7 +10,7 @@
             @csrf
             <div class="d-flex">
                 <input type="hidden" name="product_id" value="{{ $product->id }}">
-                <input type="number" name="quantity" value="1" min="0" >
+                <input type="number" name="quantity" value="1" min="1" >
                 <button type="submit" class="btn btn-danger btn-sm ms-auto">Ajouter au panier</button>
             </div>
         </form>

@@ -7,9 +7,5 @@
 @section('pageTitle',$product->name)
 
 @section('content')
-    <x-product-card
-        :name="$product->name"
-        :price="$product->price"
-        :category="$product->category->name"
-    />
+    <x-product-card :product="$product"/>
 @endsection

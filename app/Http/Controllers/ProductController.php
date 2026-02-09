@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreProductRequest;
 use App\Models\Product;
 use App\Models\Category;
-use App\View\Components\ProductCard;
-use Illuminate\Http\Request;
-use Illuminate\Support\Str;
-use Laravel\Prompts\Concerns\Fallback;
+
 
 class ProductController extends Controller
 {
@@ -32,18 +30,9 @@ class ProductController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreProductRequest $request)
     {
-        $validated = $request->validate([
-            'name' => 'required|string|max:255',
-            'price' => 'required|numeric|min:0',
-            'stock' => 'numeric',
-            
-            'category_id' => 'required|exists:categories,id'
-        ]);
-        $validated['slug'] = Str::slug($validated['name']);
-        $validated['description'] = $request->input('description',null);
-        Product::create($validated);
+        Product::create($request->validated());
         return redirect()->route('products.index')
                ->with('success', 'Produit créé avec succès !');
 
@@ -69,20 +58,9 @@ class ProductController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(StoreProductRequest $request, Product $product)
     {
-        $product = Product::findOrFail($id);
-        $validated = $request->validate([
-            'name' => 'required|string|max:255',
-            'price' => 'required|numeric|min:0',
-            'stock' => 'numeric',
-            'image' => 'url|nullable',
-            'description' => 'string|nullable',
-            'category_id' => 'required|exists:categories,id',
-            'active' => 'boolean'
-        ]);
-        $validated['slug'] = Str::slug($validated['name']);
-        $product->update($validated);
+        $product->update($request->validated());
         return redirect()->route('products.index')
                ->with('success', 'Produit modifié avec succès !');
 
@@ -91,9 +69,9 @@ class ProductController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Product $product)
     {
-        Product::destroy($id);
+        Product::destroy($product->id);
         return redirect()->route('products.index')
             ->with('success', 'Produit supprimé avec succès !');
     }

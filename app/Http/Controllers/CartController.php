@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreCartRequest;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
@@ -25,12 +26,9 @@ class CartController extends Controller
         return view('cart.index', compact('products','totalCart'));
     }
 
-    public function add(Request $request)
+    public function add(StoreCartRequest $request)
     {
-        $request->validate([
-            'product_id' => 'required|integer|exists:products,id',
-            'quantity' => 'required|integer|min:1',
-        ]);
+        $request->validated();
         $cart = session()->get('cart', []);
         $productId = $request->product_id;
         $quantity = $request->quantity;
@@ -45,13 +43,10 @@ class CartController extends Controller
     }
    
 
-    public function update(Request $request, Product $product)
+    public function update(StoreCartRequest $request, Product $product)
     {
-        //Validation d'une quantitée saisie positive
-        $request->validate([
-            'quantity' => 'required|integer|min:0',
-        ]);
-
+        
+        $request->validated();
         // Récupérer le panier depuis la session
         $cart = session()->get('cart', []);
         // Vérifier si le produit existe dans le panier

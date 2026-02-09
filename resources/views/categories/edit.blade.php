@@ -41,7 +41,7 @@
         @csrf
         @method('DELETE')
         <div class="d-flex">
-            <button type="submit" class="btn btn-danger btn-sm ms-auto">Supprimer la catégorie</button>
+            <button type="submit" class="btn btn-danger">Supprimer la catégorie</button>
         </div>
     </form>
 

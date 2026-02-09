@@ -19,8 +19,8 @@
                 <div class="col-md-4 mb-4">
                     <x-categories-card :name="$category->name" :description="$category->description" />
                     <div class="mt-2 d-flex justify-content-between">
-                        <a href="{{ route('categories.show', $category->id) }}" class="btn btn-primary btn-sm">Voir</a>
-                        <a href="{{ route('categories.edit', $category->id) }}" class="btn btn-outline-secondary btn-sm">Modifier</a>
+                        <a href="{{ route('categories.show', $category) }}" class="btn btn-primary btn-sm">Voir</a>
+                        <a href="{{ route('categories.edit', $category) }}" class="btn btn-outline-secondary btn-sm">Modifier</a>
                     </div>
                 </div>
             @endforeach
