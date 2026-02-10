@@ -79,9 +79,13 @@
                 {{ session('success') }}
             </div>
         @endif
+        @if(session('error'))
+            <div class="alert alert-danger">
+                {{ session('error') }}
+            </div>
+        @endif
         @yield('content')
     </main>
-
     <footer class="bg-light border-top mt-4">
         <div class="container py-3">
             <div class="d-flex justify-content-between align-items-center flex-column flex-md-row">

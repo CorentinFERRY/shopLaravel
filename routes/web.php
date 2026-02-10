@@ -30,9 +30,9 @@ Route::get('/products/{id}', [ProductController::class, 'show'])
 // Une ligne = 7 routes !
 Route::resource('products', ProductController::class)
     ->except(['index','show'])
-    ->middleware('auth');
+    ->middleware('admin');
 Route::resource('products', ProductController::class)
-    ->only(['index', 'show']);
+    ->only(['index', 'show']); 
 // Crée automatiquement :
 // GET    /products          → index   → products.index
 // GET    /products/create   → create  → products.create
@@ -44,7 +44,7 @@ Route::resource('products', ProductController::class)
 
 Route::resource('categories',CategoryController::class)
     ->except(['index','show'])
-    ->middleware('auth');
+    ->middleware('admin');
 Route::resource('categories', CategoryController::class)
     ->only(['index', 'show']);
 // Crée automatiquement :
@@ -58,7 +58,7 @@ Route::resource('categories', CategoryController::class)
 
 // Groupe de routes admin 
 // Crée un groupe pour le préfix '/admin' nommé par 'admin.xxxxx'
-Route::name('admin.')->prefix('/admin')->middleware('auth')->group(function () {
+Route::name('admin.')->prefix('/admin')->middleware('admin')->group(function () {
     Route::get('/dashboard', [AdminController::class, 'dashboard'])
         ->name('dashboard');                                                  // Ici on aura admin.dashboard 
     Route::get('/listUsers', [AdminController::class, 'listUsers'])
