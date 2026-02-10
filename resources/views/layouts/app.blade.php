@@ -31,11 +31,11 @@
                                 <span class="badge bg-info rounded-pill ms-2">{{count(session()->get('cart', [])) }}</span>
                             </a>
                         </li>
-                        @auth
+                        @admin
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('admin.dashboard') }}">Dashboard admin</a>
                             </li>
-                        @endauth
+                        @endadmin
                     </ul>
 
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
@@ -96,9 +96,9 @@
                     <a class="link-secondary me-3" href="{{ route('cart.index') }}">
                         Mon panier<span class="badge bg-info rounded-pill ms-2">{{count(session()->get('cart', [])) }}</span>
                     </a>
-                    @auth
+                    @admin
                         <a href="{{ route('admin.dashboard') }}" class="link-secondary">Administration</a>
-                    @endauth
+                    @endadmin
                 </div>
             </div>
         </div>
