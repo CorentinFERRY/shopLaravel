@@ -1,6 +1,9 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\LogoutController;
+use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\PageController;
@@ -25,7 +28,11 @@ Route::get('/products/{id}', [ProductController::class, 'show'])
 */
 
 // Une ligne = 7 routes !
-Route::resource('products', ProductController::class);
+Route::resource('products', ProductController::class)
+    ->except(['index','show'])
+    ->middleware('auth');
+Route::resource('products', ProductController::class)
+    ->only(['index', 'show']);
 // Crée automatiquement :
 // GET    /products          → index   → products.index
 // GET    /products/create   → create  → products.create
@@ -35,7 +42,11 @@ Route::resource('products', ProductController::class);
 // PUT    /products/{product}     → update  → products.update
 // DELETE /products/{product}     → destroy → products.destroy
 
-Route::resource('categories',CategoryController::class);
+Route::resource('categories',CategoryController::class)
+    ->except(['index','show'])
+    ->middleware('auth');
+Route::resource('categories', CategoryController::class)
+    ->only(['index', 'show']);
 // Crée automatiquement :
 // GET    /categories          → index   → categories.index
 // GET    /categories/create   → create  → categories.create
@@ -47,7 +58,7 @@ Route::resource('categories',CategoryController::class);
 
 // Groupe de routes admin 
 // Crée un groupe pour le préfix '/admin' nommé par 'admin.xxxxx'
-Route::name('admin.')->prefix('/admin')->group(function () {
+Route::name('admin.')->prefix('/admin')->middleware('auth')->group(function () {
     Route::get('/dashboard', [AdminController::class, 'dashboard'])
         ->name('dashboard');                                                  // Ici on aura admin.dashboard 
     Route::get('/listUsers', [AdminController::class, 'listUsers'])
@@ -55,7 +66,7 @@ Route::name('admin.')->prefix('/admin')->group(function () {
 });
 
 //Groupe de routes cart
-Route::name('cart.')->prefix('/cart')->group(function () {
+Route::name('cart.')->prefix('/cart')->middleware('auth')->group(function () {
     Route::get('/index',[CartController::class,'index'])
         ->name('index');
     Route::post('/add',[CartController::class,'add'])
@@ -68,11 +79,18 @@ Route::name('cart.')->prefix('/cart')->group(function () {
         ->name('clear');
 });
 
-// Routes Auth
-Route::get('/login')->name('login');
-Route::get('/register')->name('register');
-Route::post('/logout')->name('logout');
-Route::get('/profile')->name('profile');
+Route::middleware('guest')->group(function(){
+    Route::get('/register',[RegisterController::class,'showForm'])->name('register');
+    Route::post('/register',[RegisterController::class,'register']);
+    Route::get('/login',[LoginController::class,'showForm'])->name('login');
+    Route::post('/login',[LoginController::class,'login']);
+});
+
+Route::middleware('auth')->group(function(){
+    Route::post('/logout',[LogoutController::class,'logout'])->name('logout');
+    Route::get('/profile')->name('profile');
+
+});
 
 
 
