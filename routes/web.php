@@ -97,6 +97,9 @@ Route::middleware('auth')->name('orders.')->prefix('/orders')->group(function(){
     Route::get('/',[OrderController::class,'index'])->name('index');
     Route::get('/{order}',[OrderController::class,'show'])->name('show');
     Route::post('/',[OrderController::class,'store'])->name('store');
+    Route::middleware('admin')->group(function(){
+        Route::delete('/{order}',[OrderController::class,'destroy'])->name('destroy');
+    });
 });
 
 // Puis la route fallback en DERNIER

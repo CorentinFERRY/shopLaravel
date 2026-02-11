@@ -1,19 +1,48 @@
-<form action="{{ route('orders.show', $order) }}" method="GET">
-    <div class="card shadow-sm">
-        <div class="card-body d-flex flex-column">
-            <h5 class="card-title mb-2">Commande #{{ $order->order_number }}</h5>
-            
-            <p class="text-muted small mb-2">
-                <strong>Montant :</strong> {{ number_format($order->total, 2) }} €
-            </p>
-            <p class="mb-3">
-                <strong>Statut :</strong>
+<div class="card shadow-sm border-0 h-100">
+    <div class="card-body d-flex flex-column">
+        <!-- En-tête de la commande -->
+        <div class="mb-3 pb-3 border-bottom">
+            <div class="d-flex justify-content-between align-items-start">
+                <div>
+                    <h5 class="card-title mb-1">Commande #{{ $order->order_number }}</h5>
+                    @admin
+                        <p class="text-muted small mb-0">
+                            <strong>Client :</strong> {{ $order->user->name }}
+                        </p>
+                    @endadmin
+                </div>
                 <span class="badge bg-info">{{ $order->status }}</span>
-            </p>
+            </div>
+        </div>
 
-            <button type="submit" class="btn btn-primary btn-sm align-self-start">
-                Voir les détails
-            </button>
+        <!-- Détails financiers -->
+        <div class="mb-3">
+            <p class="mb-2">
+                <strong>Montant :</strong> 
+                <span class="text-danger fs-5">{{ number_format($order->total, 2) }} €</span>
+            </p>
+            <p class="text-muted small mb-0">
+                <strong>Date :</strong> {{ $order->created_at->format('d/m/Y') }}
+            </p>
+        </div>
+
+        <!-- Actions -->
+        <div class="d-flex gap-2 mt-auto">
+            <form action="{{ route('orders.show', $order) }}" method="GET">
+                <button type="submit" class="btn btn-primary btn-sm">
+                    Voir les détails
+                </button>
+            </form>
+
+            @admin
+                <form action="{{ route('orders.destroy', $order->id) }}" method="POST" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cette commande ?');">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="btn btn-danger btn-sm">
+                        <i class="bi bi-trash"></i> Supprimer
+                    </button>
+                </form>
+            @endadmin
         </div>
     </div>
-</form>
+</div>

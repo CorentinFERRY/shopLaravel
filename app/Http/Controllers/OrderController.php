@@ -8,17 +8,26 @@ use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Routing\Controller;
 
 class OrderController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('admin')->only('destroy'); 
+    }
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $orders = Order::where('user_id',Auth::id())
-                        ->get();
-        return view('orders.index',compact('orders'));
+        if (Auth::user()->is_admin) {
+            $orders = Order::all();
+        } else {
+            $orders = Order::where('user_id', Auth::id())->get();
+        }
+        return view('orders.index', compact('orders'));
     }
 
     /**
@@ -65,7 +74,7 @@ class OrderController extends Controller
         session()->forget('cart');
 
         // On redirige sur les commandes avec message de succes !
-        return redirect()->route('orders')->with('success', 'Commande passée avec succès !');
+        return redirect()->route('orders.index')->with('success', 'Commande passée avec succès !');
     }
 
     /**
@@ -82,6 +91,11 @@ class OrderController extends Controller
      */
     public function destroy(Order $order)
     {
-        //
+        DB::transaction(function () use ($order) {
+            $order->orderItems()->delete();
+            $order->delete();
+        });
+        return redirect()->route('orders.index')->with('success', 'Commande supprimée avec succès !');
     }
 }
+
