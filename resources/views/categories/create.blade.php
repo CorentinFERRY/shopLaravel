@@ -3,7 +3,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1 class="mb-4">Nouveau produit</h1>
+    <h1 class="mb-4">Nouvelle catégorie</h1>
 
     <form action="{{ route('categories.store') }}" method="POST" class="card p-4" novalidate>
         @csrf

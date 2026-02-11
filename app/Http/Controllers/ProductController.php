@@ -6,20 +6,20 @@ use App\Http\Requests\StoreProductRequest;
 use App\Models\Product;
 use App\Models\Category;
 use Illuminate\Routing\Controller;
-
+use Illuminate\Support\Facades\Request;
 
 class ProductController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth')->except(['index', 'show']);
+        $this->middleware('admin')->except(['index', 'show']);
     }
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $products = Product::with('category')->get();
+        $products = Product::with('category')->orderBy('price','desc')->paginate(15);
         return view('products.index',compact('products'));
     }
 
@@ -68,7 +68,6 @@ class ProductController extends Controller
         $product->update($request->validated());
         return redirect()->route('products.index')
                ->with('success', 'Produit modifié avec succès !');
-
     }
 
     /**

@@ -24,8 +24,9 @@
         </div>
         <div class="mb-3">
             <label for="password_confirmation" class="form-label">Confirmer le mot de passe</label>
-            <input type="password" class="form-control" id="password_confirmation" name="password_confirmation" required>
-        </div>
+            <input type="password" class="form-control @error('password') is-invalid @enderror" id="password_confirmation" name="password_confirmation" required> 
+            @error('password') <div class="invalid-feedback">{{ $message }}</div> @enderror  
+        </div>      
         <button type="submit" class="btn btn-primary">S'inscrire</button>   
     </form>
     <div class="mt-3 text-center">

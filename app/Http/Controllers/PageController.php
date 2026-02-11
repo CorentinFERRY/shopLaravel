@@ -14,7 +14,7 @@ class PageController extends Controller
         
         $data = [
             'nbrItems' => $nbrItems,
-            'state' => false
+            'state' => true
         ];
         // return view('index',['data' => $data]);
         return view('index',compact('data'));

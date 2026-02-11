@@ -1,4 +1,13 @@
-<div class="card shadow-sm">
+<div class="card shadow-sm h-100">
+    <div class="ratio ratio-4x3">
+        @if($product->image)
+            <img src="{{ $product->image }}" class="card-img-top" alt="{{ $product->name }}" style="object-fit: cover;">
+        @else
+            <div class="bg-secondary text-white d-flex align-items-center justify-content-center">
+                <span>Pas d'image</span>
+            </div>
+        @endif
+    </div>
     <div class="card-body d-flex flex-column">
         <h5 class="card-title mb-1 text-truncate">{{ $product->name }}</h5>
         <p class="text-muted mb-2 small">{{ $product->category->name }}</p>
