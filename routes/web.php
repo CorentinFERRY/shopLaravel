@@ -6,6 +6,7 @@ use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
@@ -92,9 +93,13 @@ Route::middleware('auth')->group(function(){
 
 });
 
-
+Route::middleware('auth')->name('orders.')->prefix('/orders')->group(function(){
+    Route::get('/',[OrderController::class,'index'])->name('index');
+    Route::get('/{order}',[OrderController::class,'show'])->name('show');
+    Route::post('/',[OrderController::class,'store'])->name('store');
+});
 
 // Puis la route fallback en DERNIER
 Route::fallback(function () {
-    return 'Page non trouvée ! <a href="/home">Retour à l\'accueil</a>  <meta http-equiv="refresh" content="5;URL=/"> ';
+    return 'Page non trouvée ! <a href="\">Retour à l\'accueil</a>  <meta http-equiv="refresh" content="5;URL=/"> ';
 });

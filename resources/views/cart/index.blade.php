@@ -20,9 +20,9 @@
     @endif
      <div class="d-flex justify-content-between">
         <a href="{{ route('products.index') }}" class="btn btn-success">Retour au catalogue</a>
-        <form action="" method="POST">
+        <form action="{{ route('orders.store') }}" method="POST">
             @csrf
-            <button type="submit" class="btn btn-info" disabled>Valider le panier</button>        
+            <button type="submit" class="btn btn-info">Passer commande</button>        
         </form>
         <form action="{{ route('cart.clear') }}" method="POST">
             @csrf

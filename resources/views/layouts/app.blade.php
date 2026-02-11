@@ -46,6 +46,7 @@
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userMenu">
                                     <li><a class="dropdown-item" href="{{ route('profile') }}">Mon profil</a></li>
+                                    <li><a class="dropdown-item" href="{{ route('orders.index') }}">Mes commandes</a></li>
                                     <li>
                                         <form action="{{ route('logout') }}" method="POST" class="px-3">
                                             @csrf

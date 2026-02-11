@@ -10,6 +10,7 @@ class Order extends Model
 {
     //
     protected $fillable = [
+        'user_id',
         'total',
         'status'
     ];
@@ -18,12 +19,22 @@ class Order extends Model
         'total' => 'decimal:2',
     ];
 
+    /**
+     * Récupère le numéro de commande (numéroté par utilisateur)
+     */
+    public function getOrderNumberAttribute()
+    {
+        return $this->user->orders()
+                          ->where('id', '<=', $this->id)
+                          ->count();
+    }
+
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
 
-    public function orderItem(): HasMany
+    public function orderItems(): HasMany
     {
         return $this->hasMany(OrderItem::class);
     }
