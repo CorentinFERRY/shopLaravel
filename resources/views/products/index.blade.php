@@ -8,7 +8,9 @@
 @section('content')
     <div class="d-flex justify-content-between align-items-center mb-3">
         <h2 class="h5 mb-0">Nos produits</h2>
+        @admin
         <a href="{{ route('products.create') }}" class="btn btn-success">Ajouter un nouveau produit</a>
+        @endadmin
     </div>
 
     @if($products->isEmpty())
@@ -21,7 +23,9 @@
                         <x-product-card :product="$product"/>
                         <div class="mt-2 d-flex gap-2 flex-grow-1 align-items-end">
                             <a href="{{ route('products.show', $product->id) }}" class="btn btn-primary btn-sm flex-grow-1">Voir</a>
+                            @admin
                             <a href="{{ route('products.edit', $product->id) }}" class="btn btn-outline-secondary btn-sm flex-grow-1">Modifier</a>
+                            @endadmin
                         </div>
                     </div>
                 </div>

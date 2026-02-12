@@ -19,8 +19,10 @@
         <form action="{{ route('cart.add') }}" method="POST" class="d-flex align-items-center gap-2">
             @csrf
             <input type="hidden" name="product_id" value="{{ $product->id }}">
-            <input type="number" name="quantity" value="1" min="1" class="form-control form-control-sm w-25" aria-label="Quantité">
-            <button type="submit" class="btn btn-danger btn-sm ms-auto">Ajouter au panier</button>
+            @auth
+                <input type="number" name="quantity" value="1" min="1" class="form-control form-control-sm w-25" aria-label="Quantité">
+                <button type="submit" class="btn btn-success btn-sm ms-auto">Ajouter au panier</button>
+            @endauth
         </form>
     </div>
 </div>

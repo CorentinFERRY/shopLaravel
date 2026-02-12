@@ -31,7 +31,7 @@ Route::get('/products/{id}', [ProductController::class, 'show'])
 // Une ligne = 7 routes !
 Route::resource('products', ProductController::class)
     ->except(['index','show'])
-    ->middleware('admin');
+    ->middleware('admin'); 
 Route::resource('products', ProductController::class)
     ->only(['index', 'show']); 
 // Crée automatiquement :

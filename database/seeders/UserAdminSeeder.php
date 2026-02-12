@@ -14,9 +14,9 @@ class UserAdminSeeder extends Seeder
     public function run(): void
     {
         User::factory()->create([
-            'name' => 'Coco',
-            'email' => 'corentin.ferry@le-campus-numerique.fr',
-            'password' => 'testUserAdmin',
+            'name' => 'admin',
+            'email' => 'admin@shoplaravel.com',
+            'password' => 'password',
             'is_admin' => true
         ]);
     }
