@@ -14,7 +14,9 @@
             <x-product-card :product="$product"/>
             <div class="mt-2 d-flex gap-2 flex-grow-1 align-items-end">
                 <x-button href="{{ route('products.show', $product) }}" class="btn-sm flex-grow-1">Voir</x-button>
+                @admin
                 <x-button href="{{ route('products.edit', $product) }}" color="outline-secondary" class="btn-sm flex-grow-1">Modifier</x-button>
+                @endadmin
             </div>
         </div>
     </div>

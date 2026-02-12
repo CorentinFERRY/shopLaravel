@@ -11,7 +11,7 @@
             @csrf
             <input type="hidden" name="product_id" value="{{ $product->id }}">
             <input type="number" name="quantity" value="1" min="1" class="form-control form-control-sm w-25" aria-label="Quantité">
-            <x-button color="info" class="btn-sm ms-auto" type="submit">Ajouter au panier</x-button>
+            <x-button type="submit" color="info" class="btn-sm ms-auto">Ajouter au panier</x-button>
         </form>
         @endauth
     </div>
