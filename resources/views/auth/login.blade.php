@@ -26,7 +26,7 @@
             <label class="form-check-label" for="remember">Se souvenir de moi</label>
             <input type="checkbox" class="form-check-input form-control" id="remember" name="remember" {{ old('remember') ? 'checked' : '' }}>
         </div>
-        <button type="submit" class="btn btn-primary">Se connecter</button>   
+        <x-button type="submit">Se connecter</x-button>   
     </form>
     <div class="mt-3 text-center">
         <a href="{{ route('register') }}">Pas de compte ? Inscrivez-vous </a>

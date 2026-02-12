@@ -19,15 +19,15 @@
     <p> Total : <strong>{{number_format($totalCart, 2)}} € </strong></p>
     @endif
      <div class="d-flex justify-content-between">
-        <a href="{{ route('products.index') }}" class="btn btn-success">Retour au catalogue</a>
+        <x-button href="{{ route('products.index') }}" color="success">Retour au catalogue</x-button>
         <form action="{{ route('orders.store') }}" method="POST">
             @csrf
-            <button type="submit" class="btn btn-info">Passer commande</button>        
+            <x-button type="submit" color="info">Passer commande</x-button>        
         </form>
         <form action="{{ route('cart.clear') }}" method="POST">
             @csrf
             @method('DELETE')
-            <button type="submit" class="btn btn-danger">Vider le panier</button>        
+            <x-button type="submit" color="danger">Vider le panier</x-button>        
         </form>
      </div>
 @endsection

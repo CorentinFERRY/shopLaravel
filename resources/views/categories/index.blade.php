@@ -9,7 +9,7 @@
     <div class="d-flex justify-content-between align-items-center mb-3">
         <h2 class="h5 mb-0">Catégories</h2>
         @admin
-        <a href="{{ route('categories.create') }}" class="btn btn-success">Ajouter une nouvelle catégorie</a>
+        <x-button href="{{ route('categories.create') }}" color="success">Ajouter une nouvelle catégorie</x-button>
         @endadmin
     </div>
 
@@ -21,9 +21,9 @@
                 <div class="col-md-4 mb-4">
                     <x-categories-card :name="$category->name" :description="$category->description" />
                     <div class="mt-2 d-flex justify-content-between">
-                        <a href="{{ route('categories.show', $category) }}" class="btn btn-primary btn-sm">Voir</a>
+                        <x-button href="{{ route('categories.show', $category) }}" class="btn-sm">Voir</x-button>
                         @admin
-                        <a href="{{ route('categories.edit', $category) }}" class="btn btn-outline-secondary btn-sm">Modifier</a>
+                        <x-button href="{{ route('categories.edit', $category) }}" color="outline-secondary" class="btn-sm">Modifier</x-button>
                         @endadmin
                     </div>
                 </div>

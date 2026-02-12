@@ -74,6 +74,6 @@
 </div>
 
 <div class="mt-4">
-    <a href="{{ route('orders.index') }}" class="btn btn-secondary">← Retour aux commandes</a>
+    <x-button href="{{ route('orders.index') }}" color="secondary">← Retour aux commandes</x-button>
 </div>
 @endsection

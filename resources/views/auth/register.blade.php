@@ -27,7 +27,7 @@
             <input type="password" class="form-control @error('password') is-invalid @enderror" id="password_confirmation" name="password_confirmation" required> 
             @error('password') <div class="invalid-feedback">{{ $message }}</div> @enderror  
         </div>      
-        <button type="submit" class="btn btn-primary">S'inscrire</button>   
+        <x-button type="submit">S'inscrire</x-button>   
     </form>
     <div class="mt-3 text-center">
         <a href="{{ route('login') }}">Déjà inscrit ? Connectez-vous</a>

@@ -13,8 +13,8 @@
         <div class="d-flex flex-column h-100">
             <x-product-card :product="$product"/>
             <div class="mt-2 d-flex gap-2 flex-grow-1 align-items-end">
-                <a href="{{ route('products.show', $product) }}" class="btn btn-primary btn-sm flex-grow-1">Voir</a>
-                <a href="{{ route('products.edit', $product) }}" class="btn btn-outline-secondary btn-sm flex-grow-1">Modifier</a>
+                <x-button href="{{ route('products.show', $product) }}" class="btn-sm flex-grow-1">Voir</x-button>
+                <x-button href="{{ route('products.edit', $product) }}" color="outline-secondary" class="btn-sm flex-grow-1">Modifier</x-button>
             </div>
         </div>
     </div>

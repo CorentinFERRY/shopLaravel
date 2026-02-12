@@ -8,4 +8,7 @@
 
 @section('content')
     <x-product-card :product="$product"/>
+    <div>
+        <x-button href="{{ route('products.index') }}" color="link">Retour</x-button>
+    </div>
 @endsection

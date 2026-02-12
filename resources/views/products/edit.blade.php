@@ -88,10 +88,10 @@
         </div>
 
         <div class="d-flex justify-content-between align-items-center mt-3">
-            <a href="{{ route('products.index') }}" class="btn btn-link">Annuler</a>
-            <button type="submit" class="btn btn-primary">
+            <x-button href="{{ route('products.index') }}" color="link">Annuler</x-button>
+            <x-button type="submit">
                 Modifier le produit
-            </button>
+            </x-button>
         </div>
     </form>
 
@@ -99,7 +99,7 @@
         @csrf
         @method('DELETE')
         <div class="d-flex">
-            <button type="submit" class="btn btn-danger btn-sm ms-auto">Supprimer le produit</button>
+            <x-button type="submit" class="btn-sm ms-auto" color="danger">Supprimer le produit</x-button>
         </div>
     </form>
 

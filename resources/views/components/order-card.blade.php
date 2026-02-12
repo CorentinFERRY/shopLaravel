@@ -29,18 +29,18 @@
         <!-- Actions -->
         <div class="d-flex gap-2 mt-auto">
             <form action="{{ route('orders.show', $order) }}" method="GET">
-                <button type="submit" class="btn btn-primary btn-sm">
+                <x-button type="submit" class="btn-sm">
                     Voir les détails
-                </button>
+                </x-button>
             </form>
 
             @admin
                 <form action="{{ route('orders.destroy', $order->id) }}" method="POST" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cette commande ?');">
                     @csrf
                     @method('DELETE')
-                    <button type="submit" class="btn btn-danger btn-sm">
+                    <x-button type="submit" class="btn-sm" color="danger">
                         <i class="bi bi-trash"></i> Supprimer
-                    </button>
+                    </x-button>
                 </form>
             @endadmin
         </div>
