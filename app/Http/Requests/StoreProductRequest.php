@@ -24,8 +24,7 @@ class StoreProductRequest extends FormRequest
     {
         return [
             'name' => 'required|string|max:255',
-            'slug' => 'string|max:255',
-            //'slug' => 'required|string|max:255|unique:products,slug',
+            'slug' => 'string|max:255|unique:products,slug',
             'price' => 'required|numeric|min:0',
             'stock' => 'nullable|integer|min:0',
             'category_id' => 'required|exists:categories,id',
@@ -47,12 +46,6 @@ class StoreProductRequest extends FormRequest
 
     protected function prepareForValidation(): void
 {
-    // Générer le slug à partir du nom si non fourni
-    if (empty($this->slug) && !empty($this->name)) {
-        $this->merge([
-            'slug' => Str::slug($this->name),
-        ]);
-    }
     // Nettoyer les espaces du nom
     if ($this->has('name')) {
         $this->merge([

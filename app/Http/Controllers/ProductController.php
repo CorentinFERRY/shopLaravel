@@ -5,8 +5,9 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreProductRequest;
 use App\Models\Product;
 use App\Models\Category;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Routing\Controller;
-use Illuminate\Support\Facades\Request;
+
 
 class ProductController extends Controller
 {
@@ -16,7 +17,7 @@ class ProductController extends Controller
     }
     /**
      * Display a listing of the resource.
-     */
+    */
     public function index()
     {
         $products = Product::with('category')->paginate(15);
@@ -79,4 +80,5 @@ class ProductController extends Controller
         return redirect()->route('products.index')
             ->with('success', 'Produit supprimé avec succès !');
     }
+
 }
